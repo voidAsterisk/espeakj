@@ -55,18 +55,24 @@ public class Graph {
 			JPanel j_Frame = new JPanel();
 			j_Frame.setVisible(true);
 			j_Frame.setBounds(10, y, 400, 50);
-			j_Frame.setBorder(BorderFactory.createLineBorder(Color.RED));
+			j_Frame.setBorder(BorderFactory.createLineBorder(Color.GREEN));
 			
 			y += 75;
+
 			j_Frame.addMouseListener(new MouseListener() {
 				public void mouseClicked(MouseEvent e) {
 					loadFrame((JPanel) e.getSource());
+				}
+				
+				public void mouseMoved(MouseEvent e)
+				{
+					
 				}
 
 				@Override
 				public void mouseEntered(MouseEvent arg0) {
 					// TODO Auto-generated method stub
-					
+				
 				}
 
 				@Override
@@ -94,6 +100,8 @@ public class Graph {
 			//filePanel.add(jButton);
 			filePanel.add(j_Frame);
 			mapPanels.put(j_Frame, currentFrame);
+			
+			loadFrame(j_Frame);
 
 		}
 
@@ -146,10 +154,13 @@ public class Graph {
 			MainWindow.tfBp.get(i).setText("" + (peaks[i + 1][6]));
 		}
 
-		// MainWindow.spampF.setValue(frameToLoad.amp_adjust);
+		 //MainWindow.spampF.setValue(frameToLoad.amp_adjust);
 		// outputPhonemes();
 		
-		
+		// X axis
+		//Graphics g = currentPanel.getGraphics();
+		// ???: Do something here with this
+
 		class SinX extends JPanel {
 			
 			/**

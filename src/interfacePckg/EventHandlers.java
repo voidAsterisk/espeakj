@@ -62,7 +62,12 @@ public class EventHandlers {
 	ActionListener translate = new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
 			EspeakNg espeakNg = new EspeakNg(mainW);
-			espeakNg.makeAction("translate");
+			try {
+				espeakNg.makeAction("translate");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 	};
@@ -70,14 +75,24 @@ public class EventHandlers {
 	ActionListener speak = new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
 			EspeakNg espeakNg = new EspeakNg(mainW);
-			espeakNg.makeAction("speak");
+			try {
+				espeakNg.makeAction("speak");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	};
 
 	ActionListener showRules = new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
 			EspeakNg espeakNg = new EspeakNg(mainW);
-			espeakNg.makeAction("showRules");
+			try {
+				espeakNg.makeAction("showRules");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	};
 
@@ -98,7 +113,12 @@ public class EventHandlers {
 	ActionListener showIpa = new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
 			EspeakNg espeakNg = new EspeakNg(mainW);
-			espeakNg.makeAction("showIpa");
+			try {
+				espeakNg.makeAction("showIpa");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	};
 
@@ -114,7 +134,12 @@ public class EventHandlers {
 	ActionListener speakPunctuation = new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
 			EspeakNg espeakNg = new EspeakNg(mainW);
-			espeakNg.makeAction("speakPunctuation");
+			try {
+				espeakNg.makeAction("speakPunctuation");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	};
 
@@ -122,7 +147,12 @@ public class EventHandlers {
 	ActionListener speakBySymbol = new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
 			EspeakNg espeakNg = new EspeakNg(mainW);
-			espeakNg.makeAction("speakBySymbol");
+			try {
+				espeakNg.makeAction("speakBySymbol");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	};
 

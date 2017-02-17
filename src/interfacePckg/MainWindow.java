@@ -12,6 +12,8 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 public class MainWindow extends JFrame {
+	
+	
 
 	public JMenuBar menuBar;
 	public static ArrayList<JTextField> tfFreq;

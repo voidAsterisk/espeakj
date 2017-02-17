@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Enumeration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,8 +23,8 @@ public class EspeakNg {
 		this.mainW = mainW;
 	}
 
-	public void makeAction(String command) {
-
+	public void makeAction(String command) throws IOException {
+		
 		//create file input and write text into it
 		createFileInput(getText(command));
 
@@ -40,12 +41,12 @@ public class EspeakNg {
 				.equals("speakBySymbol") ||  command
 				.equals("speak")))
 			readOutputFile();
-
+		
 	}
 
 	//each command has own command line
-	private String getRunTimeCommand(String command) {
-
+	private String getRunTimeCommand(String command) throws IOException {
+		
 		String runTimeCommand = "";
 		String voice = getVoiceFromSelection();
 		int speedVoice = mainW.optionsSpeed.getSpinnerValue();
@@ -58,8 +59,17 @@ public class EspeakNg {
 					+ fileInput.getAbsolutePath();
 			break;
 		case "speak":
+		{
 			runTimeCommand = "espeak-ng -v" + voice + " -s" + speedVoice
-					+ " -f " + fileInput.getAbsolutePath();
+					+ " -f " + fileInput.getAbsolutePath() + " --stdout | paplay";
+			BufferedReader in = new BufferedReader(new FileReader(fileInput.getAbsolutePath()));
+			String line;
+			while((line = in.readLine()) != null)
+			{
+			    System.out.println(line);
+			}
+			in.close();
+		}
 			break;
 		case "showRules":
 			runTimeCommand = "espeak-ng -q -v" + voice + " -X --phonout="
@@ -85,6 +95,7 @@ public class EspeakNg {
 		default:
 			break;
 		}
+		System.out.println(runTimeCommand);
 		return runTimeCommand;
 	}
 
@@ -110,8 +121,9 @@ public class EspeakNg {
 	}
 
 	//make an action in terminal according to the passing command
-	private void makeRunTimeAction(String runTimeCommand) {
-
+	private void makeRunTimeAction(String runTimeCommand) throws IOException {
+	
+		System.out.println("EXECUTING : " + runTimeCommand);
 		Runtime rt = Runtime.getRuntime();
 		try {
 			Process p = rt.exec(runTimeCommand);
@@ -121,27 +133,48 @@ public class EspeakNg {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+		
 	}
 
 	//create file input and write text into it
 	private void createFileInput(String text) {
-
+		
 		try {
 
 			fileInput = new File("MyFile.txt");
 			FileWriter fileWriter = new FileWriter(fileInput);
 			fileWriter.write(text);
+			System.out.println("Creating " + fileInput.getAbsolutePath());
 			fileWriter.close();
+			
+			
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		if (fileInput.exists())
+		{
+			System.out.println(fileInput.getAbsolutePath() + " exists.");
+		}
+			else
+			{
+				System.out.println(fileInput.getAbsolutePath() + " does not exist.");
+			}
 
 	}
 
 	private void createFileOutput() {
 		fileOutput = new File("testOut.txt");
+		
+		if (fileOutput.exists())
+		{
+			System.out.println(fileOutput.getAbsolutePath() + " exists.");
+		}
+		else
+		{
+			System.out.println(fileOutput.getAbsolutePath() + " does not exist.");
+		}
 	}
 
 	//get text from main interface
